@@ -1,0 +1,51 @@
+GRAPHQL http://localhost:8080/graphql
+
+query findAll {
+    findAll {
+      id
+      firstName
+      lastName
+    }
+}
+
+###
+GRAPHQL http://localhost:8080/graphql
+
+query customQuery1($varName: String!) {
+    findByLastName(lastName: $varName){
+      id
+      firstName
+      lastName
+    }
+}
+
+{
+  "varName": "pupkin"
+}
+
+###
+GRAPHQL http://localhost:8080/graphql
+
+query customQuery2($varName: Gender!) {
+    findByGender(gender: $varName){
+        id
+        firstName
+        lastName
+    }
+}
+
+{
+  "varName": "MALE"
+}
+
+###
+GRAPHQL http://localhost:8080/graphql
+
+query allTypes{
+    persons {
+        id
+    }
+}
+
+
+###

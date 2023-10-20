@@ -1,0 +1,5 @@
+query artifactRepository($id: Int!) {
+    person(id: $id) {
+        firstName
+    }
+}

@@ -1,0 +1,28 @@
+type Query {
+    persons: [Person]!
+    person(id: Int!): Person
+    findAll: [Person]!
+    findByLastName(lastName: String!): [Person]
+    findByAge(age: Int!): [Person]
+    findByGender(gender: Gender!): [Person]
+
+    }
+
+
+
+type Person {
+    id: Int!
+    firstName: String!
+    lastName: String!
+    gender: Gender
+    age: Int
+}
+
+
+
+enum Gender {
+    MALE
+    FEMALE
+    UNDEFINED
+}
+
