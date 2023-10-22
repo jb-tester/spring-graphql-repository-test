@@ -33,7 +33,7 @@ class PersonRepositoriesTests {
 	@Test
 	void querydslRepositorySingle() {
 		this.graphQlTester.documentName("defaultSingle")
-				.variable("id", "3")
+				.variable("id", 3)
 				.execute()
 				.path("person.firstName")
 				.entity(String.class).isEqualTo("sasha");
@@ -47,4 +47,17 @@ class PersonRepositoriesTests {
 				.entityList(Integer.class).containsExactly(1,2,3);
 	}
 
+	@Test
+	void querydslRepositoryFindAll() {
+		String myQuery = """
+                query findAll{
+                    findAll{
+                        id
+                    }
+                }""";
+		this.graphQlTester.document(myQuery)
+				.execute()
+				.path("findAll[*].id")
+				.entityList(Integer.class).containsExactly(1,2,3);
+	}
 }
