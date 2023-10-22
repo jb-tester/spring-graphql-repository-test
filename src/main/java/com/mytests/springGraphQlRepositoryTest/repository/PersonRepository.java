@@ -16,6 +16,9 @@ public interface PersonRepository extends
     // navigation to/from schema for all methods;
     // completion for the methods inside schema
     // all methods are shown as unused
+    // navigation to Endpoints
+    // ability to generate the HTTP Request
+
     List<Person> findByLastName(String lastName);
 
     List<Person> findByAge(int age);

@@ -29,24 +29,27 @@ class PersonRepositoriesTests {
 
 	@Autowired
 	private GraphQlTester graphQlTester;
-	
+
+	// reference to file into documentName() arg
 	@Test
 	void querydslRepositorySingle() {
 		this.graphQlTester.documentName("defaultSingle")
 				.variable("id", 3)
 				.execute()
-				.path("person.firstName")
+				.path("person.firstName")  // JsonPath expected here
 				.entity(String.class).isEqualTo("sasha");
 	}
 
+	// reference to file into documentName() arg
 	@Test
 	void querydslRepositoryMany() {
 		this.graphQlTester.documentName("defaultPlural")
 				.execute()
-				.path("persons[*].id")
+				.path("persons[*].id")  // JsonPath expected here
 				.entityList(Integer.class).containsExactly(1,2,3);
 	}
 
+	// inject GraphQL request into myQuery
 	@Test
 	void querydslRepositoryFindAll() {
 		String myQuery = """
@@ -57,7 +60,20 @@ class PersonRepositoriesTests {
                 }""";
 		this.graphQlTester.document(myQuery)
 				.execute()
-				.path("findAll[*].id")
+				.path("findAll[*].id")  // JsonPath expected here
 				.entityList(Integer.class).containsExactly(1,2,3);
+	}
+	@Test
+	void querydslRepositoryFindByAge() {
+		String myQuery = """
+                query {
+                    findByAge(age:18){
+                        id
+                    }
+                }""";
+		this.graphQlTester.document(myQuery)
+				.execute()
+				.path("findByAge[*].id")  // JsonPath expected here
+				.entityList(Integer.class).containsExactly(1);
 	}
 }
