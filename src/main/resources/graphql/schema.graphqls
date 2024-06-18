@@ -5,7 +5,7 @@ type Query {
     findByLastName(lastName: String!): [Person]
     findByAge(age: Int!): [Person]
     findByGender(gender: Gender!): [Person]
-
+    customQuery(firstName: String!): [Person]
     }
 
 

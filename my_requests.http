@@ -49,3 +49,13 @@ query allTypes{
 
 
 ###
+###
+GRAPHQL http://localhost:8080/graphql
+
+query customQuery{
+    customQuery(firstName: "sasha"){
+        id
+        firstName
+        lastName
+    }
+}

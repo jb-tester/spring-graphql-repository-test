@@ -25,6 +25,17 @@ public class PersonRepositoryInitializer implements ApplicationRunner {
 				new Person(2, "masha", "mikhailova", 20, Gender.FEMALE),
 				new Person(3, "sasha", "sidorenko", 22, Gender.UNDEFINED));
 		repositories.saveAll(repositoryList);
+		System.out.println("== all person:");
+		repositories.findAll().forEach(System.out::println);
+		System.out.println("== all men:");
+		repositories.findByGender(Gender.MALE).forEach(System.out::println);
+		System.out.println("== person with age == 20:");
+		repositories.findByAge(20).forEach(System.out::println);
+		System.out.println("== person with lastname == pupkin:");
+		repositories.findByLastName("pupkin").forEach(System.out::println);
+        System.out.println("== person with firstname == sasha:");
+		repositories.customQuery("sasha").forEach(System.out::println);
+
 	}
 
 }

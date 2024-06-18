@@ -16,6 +16,7 @@
 
 package com.mytests.springGraphQlRepositoryTest.repository;
 
+import com.mytests.springGraphQlRepositoryTest.model.Person;
 import org.junit.jupiter.api.Test;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -75,5 +76,20 @@ class PersonRepositoriesTests {
 				.execute()
 				.path("findByAge[*].id")  // JsonPath expected here
 				.entityList(Integer.class).containsExactly(1);
+	}
+	@Test
+	void querydslRepositoryCustomQuery() {
+		String myQuery = """
+                query {
+                    customQuery(firstName:\"sasha\"){
+                        id,
+                        firstName,
+                        lastName
+                    }
+                }""";
+		this.graphQlTester.document(myQuery)
+				.execute()
+				.path("customQuery[*]")  // JsonPath expected here
+				.entityList(Person.class).hasSize(1);
 	}
 }
