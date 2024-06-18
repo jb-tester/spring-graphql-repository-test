@@ -16,7 +16,7 @@ public interface PersonRepository extends
 
     // navigation to/from schema for all methods;
     // completion for the methods inside schema
-    // all methods are shown as unused
+    // all methods are shown as unused (unless called explicitely in PersonRepositoryInitializer class)
     // navigation to Endpoints
     // ability to generate the HTTP Request
 
